@@ -9,9 +9,13 @@ module.exports = {
   'parser': '@babel/eslint-parser',
 
   'parserOptions': {
-    'ecmaVersion': 2018,
+    'ecmaVersion': 2020,
     'sourceType': 'module',
     'requireConfigFile': false,
+  },
+
+  'globals': {
+    'ClipboardItem': true
   },
 
   'env': {
