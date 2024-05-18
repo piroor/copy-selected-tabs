@@ -1,6 +1,8 @@
 # History
 
  - master/HEAD
+ - 1.6.4 (2024.5.18)
+   * Copy tabs correctly without any infinite loop, even if there is any tab having its ID at its `openerTabId`, e.g. a tab after "detaching" from its opener by TST or something tree management addon.
  - 1.6.3 (2024.4.9)
    * Fix incompatibility around new clipboard API on Firefox 116 and later ([by Decimation. Thanks!](https://github.com/piroor/copy-selected-tabs-to-clipboard/pull/52))
  - 1.6.2 (2023.11.14)

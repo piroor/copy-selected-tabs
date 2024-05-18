@@ -1,6 +1,8 @@
 # 更新履歴
 
  - master/HEAD
+ - 1.6.4 (2024.5.18)
+   * TSTで親タブからデタッチされた後のタブなど、`openerTabId`にそのタブ自身のIDを持つタブがあるときにコピー操作に失敗する（無限ループに陥る）問題を修正
  - 1.6.3 (2024.4.9)
    * Firefox 116以降でのクリップボードAPIの仕様変更に追従（[by Decimation. Thanks!](https://github.com/piroor/copy-selected-tabs-to-clipboard/pull/52)）
  - 1.6.2 (2023.11.14)
