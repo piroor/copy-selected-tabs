@@ -77,6 +77,9 @@ export class Context {
 
     try {
       const collectDescendants = async tab => {
+        if (tab.openerTabId == tab.id)
+          return [];
+        log('collectDescendants: collecting for a tab ', tab);
         const childTabs = await browser.tabs.query({
           windowId:    tab.windowId,
           openerTabId: tab.id,
