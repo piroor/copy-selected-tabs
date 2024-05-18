@@ -43,6 +43,7 @@ export class Context {
         this.resolveMultiselectedTabs(),
       ]);
       this.childTabs = childTabs.filter(tab => tab.openerTabId && tab.openerTabId != tab.id);
+      log('resolve: childTabs resolved as ', this.childTabs);
     }
     catch(error) {
       console.log('failed to get child tabs: fallback to all tabs ', error);
@@ -62,14 +63,17 @@ export class Context {
         hidden:      false,
       })) :
       [this.tab];
+    log('resolveMultiselectedTabs: resolved as ', this.multiselectedTabs);
   }
 
   async resolveDescendantTabs() {
     if (this.$descendantTabs)
       return;
 
-    if (!this.resolved)
+    if (!this.resolved) {
+      log('resolveDescendantTabs: waiting to be resolved');
       await this.resolve();
+    }
 
     try {
       const collectDescendants = async tab => {
@@ -78,16 +82,23 @@ export class Context {
           openerTabId: tab.id,
           hidden:      false,
         });
-        return (await Promise.all(
+        log(`collectDescendants: childTabs of ${tab.id} `, childTabs);
+        const descendantTabs = (await Promise.all(
           childTabs.map(async childTab => [childTab, ...(await collectDescendants(childTab))])
         )).flat().filter(tab => tab.openerTabId && tab.openerTabId != tab.id);
+        log(`collectDescendants: descendantTabs of ${tab.id} `, descendantTabs);
+        return descendantTabs;
       };
       const [descendantTabs] = await Promise.all([
-        collectDescendants(this.tab),
+        collectDescendants(this.tab).catch(error => {
+          console.log(error);
+          return [];
+        }),
         this.resolveMultiselectedTabs(),
       ]);
       this.descendantTabs = descendantTabs;
       this.descendantIds = new Set(descendantTabs.map(tab => tab.id));
+      log('resolveDescendantTabs: resolved as ', this.descendantTabs);
     }
     catch(error) {
       console.log('failed to get descendant tabs: ', error);
@@ -98,17 +109,22 @@ export class Context {
     if (this.allTabs)
       return;
 
-    if (!this.resolved)
+    if (!this.resolved) {
+      log('resolveAllTabs: waiting to be resolved');
       await this.resolve();
+    }
 
     this.allTabs = await browser.tabs.query({
       windowId: this.tab.windowId,
       hidden:   false,
     }).catch(_error => []);
-    if (!this.multiselectedTabs)
+    log('resolveAllTabs: allTabs resolved as ', this.allTabs);
+    if (!this.multiselectedTabs) {
       this.multiselectedTabs = this.tab.highlighted ?
         this.allTabs.filter(tab => tab.highlighted) :
         [this.tab];
+      log('resolveAllTabs: multiselectedTabs resolved as ', this.multiselectedTabs);
+    }
   }
 
   set mode(value) {
@@ -213,10 +229,13 @@ export class Context {
     if (this.$tabsToCopy)
       return this.$tabsToCopy;
 
+    log('getTabsToCopy: waiting to resolve descendant tabs');
     await this.resolveDescendantTabs();
 
-    if (this.shouldCopyAll)
+    if (this.shouldCopyAll) {
+      log('getTabsToCopy: waiting to resolve all tabs');
       await this.resolveAllTabs();
+    }
 
     log('getTabsToCopy mode=', this.mode, ', shouldCopyAll=', this.shouldCopyAll);
 
