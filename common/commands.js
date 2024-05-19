@@ -53,14 +53,18 @@ export async function copyToClipboard(tabs, format) {
     }
   }
 
+  const prefix = /%PREFIX\((["'])?(.+?)\)\1%/i.test(format) ? RegExp.$2.replace(/%EOL%/gi, getLineFeed()) : '';
+  const suffix = /%SUFFIX\((["'])?(.+?)\)\1%/i.test(format) ? RegExp.$2.replace(/%EOL%/gi, getLineFeed()) : '';
+
   const delimiter = getDelimiter();
   const itemsToCopy = await Promise.all(tabs.map((tab, index) => fillPlaceHolders(format, tab, indentLevels[index])));
 
-  const richText = /%RT%/i.test(format) ? itemsToCopy.map(item => item.richText).join('<br />') : null ;
+  const richText = /%RT%/i.test(format) ? prefix + itemsToCopy.map(item => item.richText).join('<br />') + suffix : null ;
   let plainText = itemsToCopy.map(item => item.plainText).join(delimiter);
   if (configs.delimiter == Constants.kDELIMITER_LINE_BREAK &&
       tabs.length > 1)
     plainText += delimiter;
+  plainText = prefix + plainText + suffix;
 
   log('richText: ', richText);
   log('plainText: ', plainText);
@@ -313,6 +317,8 @@ function processPlaceHolder(
   log('processPlaceHolder ', name, rawArgs, args);
   switch (name.trim().toLowerCase()) {
     case 'rt':
+    case 'prefix':
+    case 'suffix':
       return '';
 
     case 'html':
