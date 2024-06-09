@@ -1,6 +1,8 @@
 # History
 
  - master/HEAD
+ - 1.6.5 (2024.6.9)
+   * Add new functional placeholders: `%PREFIX(...)%` and `%SUFFIX(...)%` to define text before/after while copied text.
  - 1.6.4 (2024.5.18)
    * Copy tabs correctly without any infinite loop, even if there is any tab having its ID at its `openerTabId`, e.g. a tab after "detaching" from its opener by TST or something tree management addon.
  - 1.6.3 (2024.4.9)
