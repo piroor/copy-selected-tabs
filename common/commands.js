@@ -385,6 +385,7 @@ function processPlaceHolder(
     case 'eol':
       return getLineFeed();
 
+    case 'tree_indent':
     case 'tst_indent': {
       const indenters = args.length == 0 ?
         (rawArgs != '' ?  // for backward compatibility
