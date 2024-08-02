@@ -153,17 +153,24 @@ export class Context {
   }
 
   get menuItemTitleKey() {
-    // detect tree parent at first
-    if (this.isTreeParent &&
-        configs.modeForNoSelectionTree != Constants.kCOPY_INHERIT) {
-      return this.shouldCopyOnlyDescendants ?
-        'context_copyTreeDescendants_label' :
-        'context_copyTree_label';
+    if (this.multiselectedTabs.length > 1)
+      return 'context_copyTab_label';
+
+    if (this.shouldCopyAll)
+      return 'context_copyAllTabs_label';
+
+    if (this.mode == Constants.kCOPY_INDIVIDUAL_TAB ||
+        configs.modeForNoSelectionTree == Constants.kCOPY_INHERIT)
+      return 'context_copyTab_label';
+
+    if (this.isTreeParent) {
+      if (this.shouldCopyOnlyDescendants)
+        return 'context_copyTreeDescendants_label';
+
+      return 'context_copyTree_label';
     }
 
-    return this.shouldCopyAll ?
-      'context_copyAllTabs_label' :
-      'context_copyTab_label';
+    return 'context_copyTab_label';
   }
 
   get isTreeParent() {
@@ -193,7 +200,10 @@ export class Context {
 
     return this.$shouldCopyMultipleTabs = (
       (this.isTreeParent &&
-       [...(this.shouldCopyOnlyDescendants ? [] : [this.tab]), ...(this.childTabs || this.descendantIds)]) ||
+       (this.mode == Constants.kCOPY_TREE ||
+        this.mode == Constants.kCOPY_TREE_DESCENDANTS) &&
+       [...(this.shouldCopyOnlyDescendants ? [] : [this.tab]),
+        ...(this.childTabs || this.descendantIds)]) ||
       this.multiselectedTabs
     ).length > 1;
   }

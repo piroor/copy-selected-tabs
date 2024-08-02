@@ -351,7 +351,10 @@ async function onShown(info, tab) {
   await context.resolve();
 
   const multiselected = context.multiselectedTabs.length > 1;
-  const chooseFromMenu = (!multiselected && context.isTreeParent ? configs.modeForNoSelectionTree : configs.modeForNoSelection) == Constants.kCOPY_CHOOSE_FROM_MENU;
+  const chooseFromMenu = (
+    !multiselected &&
+    context.mode == Constants.kCOPY_CHOOSE_FROM_MENU
+  );
   log('onShown ', {
     chooseFromMenu,
     isTreeParent: context.isTreeParent,
@@ -372,7 +375,8 @@ async function onShown(info, tab) {
       !item.hiddenForTopLevelItem &&
       configs[item.config] &&
       hasMultipleVisibleItems &&
-      (context.shouldCopyMultipleTabs || (configs.modeForNoSelection != Constants.kCOPY_NOTHING))
+      (context.shouldCopyMultipleTabs ||
+       context.mode != Constants.kCOPY_NOTHING)
     );
     item.title = browser.i18n.getMessage(titleKey);
     if (lastVisible == item.visible &&
