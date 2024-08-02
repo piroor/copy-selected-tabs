@@ -203,7 +203,7 @@ export class Context {
        (this.mode == Constants.kCOPY_TREE ||
         this.mode == Constants.kCOPY_TREE_DESCENDANTS) &&
        [...(this.shouldCopyOnlyDescendants ? [] : [this.tab]),
-        ...(this.childTabs || this.descendantIds)]) ||
+         ...(this.childTabs || this.descendantIds)]) ||
       this.multiselectedTabs
     ).length > 1;
   }
