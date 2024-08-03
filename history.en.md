@@ -1,6 +1,7 @@
 # History
 
  - master/HEAD
+ - 1.6.6 (2024.8.4)
    * The context menu command now behaves based on the user configuration correctly for a tree parent tab, even if you choose a reaction not "Copy Whole Tree" or "Copy Descendants".
  - 1.6.5 (2024.6.9)
    * Add new functional placeholders: `%PREFIX(...)%` and `%SUFFIX(...)%` to define text before/after while copied text.
