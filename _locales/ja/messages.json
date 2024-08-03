@@ -83,7 +83,7 @@
   "config_copyToClipboardFormats_down":     { "message": "下へ移動" },
   "config_copyToClipboardFormats_restoreDefaults": { "message": "追加した書式を維持して既定の書式を復元する" },
   "config_copyToClipboardFormats_accesskey": { "message": "ラベル内で「&」に続く空白以外の文字（例：「&Location」の「L」）はその項目のアクセスキーになります。" },
-  "config_copyToClipboardFormats_placeholders": { "message": "書式には以下のプレースホルダを使えます：\n%URL%=ページのURL,\n%TITLE%=ページのタイトル,\n%TREE_INDENT(indenter1, indenter2, ... indenterN)%=インデント（Tree Style Tabなどのタブ管理アドオンを使用）\n%TAB%=タブ文字,\n%EOL%=改行,\n%CONTAINER_NAME(prefix, suffix)%=コンテナーの名前（例：「%CONTAINER_NAME('[', ']')%」は「個人用」のコンテナータブであれば「[個人用]」になります）,\n%CONTAINER_URL%=\"ext+container:\"スキームを伴ったURL（Open external links in a container用）" },
+  "config_copyToClipboardFormats_placeholders": { "message": "書式には以下のプレースホルダを使えます：\n%URL%=ページのURL,\n%TITLE%=ページのタイトル,\n%TREE_INDENT(indenter1, indenter2, ... indenterN)%=インデント\n%TAB%=タブ文字,\n%EOL%=改行,\n%CONTAINER_NAME(prefix, suffix)%=コンテナーの名前（例：「%CONTAINER_NAME('[', ']')%」は「個人用」のコンテナータブであれば「[個人用]」になります）,\n%CONTAINER_URL%=\"ext+container:\"スキームを伴ったURL（Open external links in a container用）" },
   "config_copyToClipboardFormats_placeholders_special": { "message": "ページの内容に基づくプレースホルダー（権限の許可が必要です）：\n%AUTHOR%=metaタグで指定された作者名,\n%DESCRIPTION%=metaタグで指定された説明文,\n%KEYWORDS%=metaタグで指定された検索用キーワード,\n%RT%=リッチテキストとしてコピーする（このプレースホルダ自体は空文字に変換されます）,\n%PREFIX(...)%=指定文字列を全体の前に足す,\n%SUFFIX(...)%=指定文字列を全体の後に足す" },
   "config_copyToClipboardFormats_placeholders_html_safe": { "message": "%HTML_SAFE(...)% で文字列をHTML用にエスケープできます。\n例：\n%HTML_SAFE(%TITLE%)%→HTML用にエスケープされたタイトル" },
   "config_copyToClipboardFormats_placeholders_md_safe": { "message": "%MD_SAFE(...)% や %MD_LINK_TITLE_SAFE(...)% で文字列をMarkdown用にもエスケープできます。\n例：\n[%MD_LINK_TITLE_SAFE(%TITLE%)%](%MD_SAFE(%URL%)%) → Markdownでのリンク" },
@@ -107,7 +107,7 @@
 
   "config_modeForNoSelection_caption":               { "message": "タブが複数選択されていないときの動作" },
   "config_modeForNoSelectionTab_caption":            { "message": "単独のタブに対して操作した場合" },
-  "config_modeForNoSelectionTree_caption":           { "message": "ツリーの親タブに対して操作した場合（Tree Style Tabなどのタブ管理アドオンが必要）" },
+  "config_modeForNoSelectionTree_caption":           { "message": "ツリーの親タブに対して操作した場合" },
   "config_modeForNoSelection_label":                 { "message": "通常の操作" },
   "config_modeForNoSelection_nothing_label":         { "message": "(何もしない)" },
   "config_modeForNoSelection_choose_label":          { "message": "その都度メニューから選択する" },
