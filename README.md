@@ -31,6 +31,9 @@
 |CSV with header|`%PREFIX(title,url%EOL%)%"%REPLACE(%TITLE%,'"','""')%","%REPLACE(%URL%,'"','""')%"`|
 |Array in JavaScript/JSON|`%PREFIX([%EOL%)%%SUFFIX(]%EOL%)%  "%REPLACE(%TITLE%,'"','\\"')%", "%REPLACE(%URL%,'"','\\"')%",`|
 |Hash in JavaScript/JSON|`%PREFIX({%EOL%)%%SUFFIX(}%EOL%)%  "%REPLACE(%TITLE%,'"','\\"')%": "%REPLACE(%URL%,'"','\\"')%",`|
+|PlantUML Table|`%PREFIX(@startuml%EOL%\|= title \|= url \|%EOL%)%%SUFFIX(@enduml%EOL%)%\| %REPLACE(%TITLE%,'\\|','\\\|')% \| %REPLACE(%URL%,'\\|','\\\|')% \|`|
+|PlantUML List|`%PREFIX(@startuml%EOL%* Webpages%EOL%)%%SUFFIX(@enduml%EOL%)%** "%TITLE%" : %URL%`|
+|PlantUML Nodes|`%PREFIX(@startuml%EOL%title Webpages%EOL%%EOL%)%%SUFFIX(@enduml%EOL%)%[%TITLE%] --> [%URL%]`|
 
 
 * `%CONTAINER_URL%` will be filled with a URL for [Open external links in a container](https://addons.mozilla.org/firefox/addon/open-url-in-container/), if it is non-default container tab.
