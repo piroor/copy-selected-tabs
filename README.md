@@ -22,11 +22,16 @@
 |HTML Link List (Rich Text, unordered)|`%RT%%PREFIX(<ul>%EOL%)%%SUFFIX(</ul>%EOL%)%<li><a href="%URL_HTMLIFIED%">%TITLE_HTMLIFIED%</a></li>%EOL%`|
 |Markdown Link|`[%MD_SAFE(%TITLE%)%](%URL% "%MD_LINK_TITLE_SAFE(%TITLE%)%")`|
 |Markdown Link List|`%TREE_INDENT("  ")%* [%MD_SAFE(%TITLE%)%](%URL% "%MD_LINK_TITLE_SAFE(%TITLE%)%")`|
+|Markdown Tables|`%PREFIX(|title|url|%EOL%|---|---|%EOL%)%|%REPLACE(%TITLE%,'\|','\\|')%|%REPLACE(%URL%,'\|','\\|')%|`|
 |URL without query|`%REPLACE("%URL%", "\?.*$", "")%`|
 |URL without query except Google|`%REPLACE("%URL%", "^(?!\w+://[^/]*\.google\.[^/]*/.*)\?.*$", "$1")`|
 |Org Mode Link List|`*%TREE_INDENT(*)% [[%URL%][%TITLE%]]`|
 |Firefox container Org Mode| `[[%CONTAINER_URL%][%CONTAINER_NAME("", ": ")%%TITLE%]]`|
 |Redmine Issue #|`#%REPLACE("%URL%", "^\w+://.+/([\d+]+)(?:\?[^#]*)?(?:#(?:note-([\d]+))?[^#]*)?$", "$1-$2", "-$", "")%`|
+|CSV with header|`%PREFIX(title,url%EOL%)%"%REPLACE(%TITLE%,'"','""')%","%REPLACE(%URL%,'"','""')%"`|
+|Array in JavaScript/JSON|`%PREFIX([%EOL%)%%SUFFIX(]%EOL%)%  "%REPLACE(%TITLE%,'"','\\"')%", "%REPLACE(%URL%,'"','\\"')%",`|
+|Hash in JavaScript/JSON|`%PREFIX({%EOL%)%%SUFFIX(}%EOL%)%  "%REPLACE(%TITLE%,'"','\\"')%": "%REPLACE(%URL%,'"','\\"')%",`|
+
 
 * `%CONTAINER_URL%` will be filled with a URL for [Open external links in a container](https://addons.mozilla.org/firefox/addon/open-url-in-container/), if it is non-default container tab.
 
