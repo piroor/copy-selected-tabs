@@ -20,7 +20,7 @@ jobs:
         cat manifest.json.bak | jq ".version |= \"$version\"" > manifest.json
     - name: build xpi
       run: make
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v4
       with:
         name: copy-selected-tabs-to-clipboard.xpi
         path: copy-selected-tabs-to-clipboard.xpi
