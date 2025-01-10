@@ -7,7 +7,8 @@
 
 import {
   log,
-  configs
+  configs,
+  isRTL,
 } from '/common/common.js';
 import * as Permissions from '/common/permissions.js';
 import Options from '/extlib/Options.js';
@@ -32,6 +33,7 @@ function onConfigChanged(key) {
 
 configs.$addObserver(onConfigChanged);
 window.addEventListener('DOMContentLoaded', async () => {
+  document.documentElement.classList.toggle('rtl', isRTL());
   await configs.$loaded;
 
   gFormatRows = document.querySelector('#copyToClipboardFormatsRows');

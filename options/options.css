@@ -11,6 +11,10 @@
   opacity: 0;
 }
 
+:root.rtl {
+  direction: rtl;
+}
+
 p, ul {
   margin: 0 0 0.5em 0;
   padding: 0;
